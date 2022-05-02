@@ -230,9 +230,9 @@ function realismAddon_gearbox.update(self, superFunc, dt)
 			local wantedRpm = (self.maxRpm - self.minRpm) * accInput + self.minRpm;
 			local currentRpm = self.lastRealMotorRpm;
 			if currentRpm < wantedRpm then
-				currentRpm = math.min(currentRpm + 2 * dt, wantedRpm);  -- to do, do proper engine rpm increase calculation 
+				currentRpm = math.min(currentRpm + ((self.maxRpm - self.minRpm) / 650) * dt, wantedRpm);  -- not perfect, but better if vehicles have different rpm ranges, e.g. cars
 			elseif currentRpm > wantedRpm then
-				currentRpm = math.max(currentRpm - 1 * dt, wantedRpm);
+				currentRpm = math.max(currentRpm - ((self.maxRpm - self.minRpm) / 1300) * dt, wantedRpm);
 			end;	
 
 			
